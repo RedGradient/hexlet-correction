@@ -5,4 +5,4 @@ WORKDIR /app
 
 COPY . .
 RUN mvn clean package
-CMD java -jar -Dspring.profiles.active=prod ./target/typoreporter-*.jar
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "./target/typoreporter-*.jar"]

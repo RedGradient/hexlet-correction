@@ -1,7 +1,8 @@
-FROM eclipse-temurin:19-jdk-alpine
+# FROM eclipse-temurin:19-jdk-alpine
+FROM maven:latest
 
 WORKDIR /app
 
 COPY . .
-
-CMD java -jar -Dspring.profiles.active=prod ./typoreporter-*.jar
+RUN mvn clean package
+CMD java -jar -Dspring.profiles.active=prod ./target/typoreporter-*.jar

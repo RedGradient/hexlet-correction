@@ -4,4 +4,4 @@ WORKDIR /app
 
 COPY . .
 
-CMD java -jar -Dspring.profiles.active=prod ./target/typoreporter-*.jar
+CMD java -jar -Dspring.profiles.active=prod ./typoreporter-*.jar

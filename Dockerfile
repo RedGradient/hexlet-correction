@@ -5,4 +5,5 @@ WORKDIR /app
 
 COPY . .
 RUN mvn clean package
-ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "./target/typoreporter-*.jar"]
+EXPOSE 8080:8080
+ENTRYPOINT java -jar -Dspring.profiles.active=prod ./target/typoreporter-*.jar

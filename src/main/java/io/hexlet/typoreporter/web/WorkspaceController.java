@@ -23,6 +23,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.SortDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -53,6 +54,8 @@ import static org.springframework.data.domain.Sort.Order.asc;
 @RequiredArgsConstructor
 public class WorkspaceController {
 
+    private static final String IS_USER_RELATED_TO_WKS =
+        "@workspaceService.isUserRelatedToWorkspace(#wksName, authentication.name)";
     private final TreeSet<Integer> availableSizes = new TreeSet<>(List.of(2, 5, 10, 15, 25));
 
     private final TypoService typoService;
@@ -93,6 +96,7 @@ public class WorkspaceController {
     }
 
     @GetMapping("/{wksName}")
+    @PreAuthorize(IS_USER_RELATED_TO_WKS)
     public String getWorkspaceInfoPage(Model model, @PathVariable String wksName) {
         var wksOptional = workspaceService.getWorkspaceInfoByName(wksName);
         if (wksOptional.isEmpty()) {

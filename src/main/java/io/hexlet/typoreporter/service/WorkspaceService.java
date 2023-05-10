@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 
@@ -114,5 +115,19 @@ public class WorkspaceService {
             .map(WorkspaceRole::getWorkspace)
             .map(workspaceMapper::toWorkspaceInfo)
             .toList()).orElseGet(ArrayList::new);
+    }
+
+    public boolean isUserRelatedToWorkspace(String wksName, String username) {
+        final var accountOptional = accountRepository.findAccountByUsername(username);
+        return accountOptional.map(account -> account.getWorkspaceRoles().stream()
+                .map(WorkspaceRole::getWorkspace)
+                .anyMatch(wks -> wks.getName().equals(wksName)))
+            .orElse(false);
+
+//        var roles = accountOptional.get().getWorkspaceRoles();
+//        var wksList = roles.stream().map(WorkspaceRole::getWorkspace).toList();
+//        var wksList2 = wksList.stream().filter(wks -> wks.getName().equals(wksName)).toList();
+//        return wksList2.isEmpty();
+//        return roles.stream().map(WorkspaceRole::getWorkspace).anyMatch(wks -> wks.getName().equals(wksName));
     }
 }

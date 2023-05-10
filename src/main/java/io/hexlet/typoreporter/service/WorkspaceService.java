@@ -123,11 +123,5 @@ public class WorkspaceService {
                 .map(WorkspaceRole::getWorkspace)
                 .anyMatch(wks -> wks.getName().equals(wksName)))
             .orElse(false);
-
-//        var roles = accountOptional.get().getWorkspaceRoles();
-//        var wksList = roles.stream().map(WorkspaceRole::getWorkspace).toList();
-//        var wksList2 = wksList.stream().filter(wks -> wks.getName().equals(wksName)).toList();
-//        return wksList2.isEmpty();
-//        return roles.stream().map(WorkspaceRole::getWorkspace).anyMatch(wks -> wks.getName().equals(wksName));
     }
 }

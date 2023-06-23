@@ -31,20 +31,13 @@
             </div>
             <div class="row my-4">
                 <div class="col">
-                    <p class="fw-bold"><span th:utext="#{text.curl-example('<code>curl</code>')}"></span>:</p>
+                    <p class="fw-bold" th:text="#{text.script-descr('<code>script</code>')}"></p>
                     <pre><code>
-curl -X POST --location "[[${rootUrl}]]/api/workspaces/[[${wksId}]]/typos" \
--H "Content-Type: application/json" \
--H "Authorization: Basic [[${wksBasicToken}]]" \
--d "{
-        \"pageUrl\": \"https://site.com/\",
-        \"reporterName\": \"reporterName\",
-        \"reporterComment\": \"reporterComment\",
-        \"textBeforeTypo\": \"textBeforeTypo\",
-        \"textTypo\": \"textTypo\",
-        \"textAfterTypo\": \"textAfterTypo\"
-    }"
-                    </code></pre>
+&lt;script&gt;
+    handleTypoReporter({ authorizationToken: [[${wksBasicToken}]],
+    workSpaceUrl: [[${rootUrl}]], workSpaceId: [[${wksId}]]})
+&lt;/script&gt;
+    </code></pre>
                 </div>
             </div>
         </div>
